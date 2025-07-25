@@ -1,0 +1,5 @@
+Variable,Estimate,SE,p,Model
+(Intercept),0.91613,0.27199,0.001,Language ability
+StatusDLD,0.69794,0.33947,0.040,Language ability
+(Intercept),0.65487,0.26628,0.014,Bilingualism
+Lang_GroupBilingual,1.00504,0.32974,0.002,Bilingualism

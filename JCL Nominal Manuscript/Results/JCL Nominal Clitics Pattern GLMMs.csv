@@ -1,0 +1,5 @@
+Effect,Estimate,SE,p,Set,Contrast
+(Intercept),1.82,0.48,0,Clitics,TD/DLD
+StatusDLD,-3.02,0.63,0,Clitics,TD/DLD
+(Intercept),0.27,0.5,0.582,Clitics,BL/ML
+Lang_GroupBilingual,-0.35,0.61,0.563,Clitics,BL/ML

@@ -1,0 +1,13 @@
+Variable,Estimate,SE,p,Model
+(Intercept),3.472,0.614,0,Article Gender
+Exp_GenderMasculine,0.593,0.687,0.388,Article Gender
+Lang_GroupBilingual,-2.694,0.437,0,Article Gender
+StatusDLD,-2.59,0.426,0,Article Gender
+Exp_GenderMasculine:Lang_GroupBilingual,0.218,0.42,0.604,Article Gender
+Exp_GenderMasculine:StatusDLD,-0.247,0.413,0.549,Article Gender
+(Intercept),3.036,0.451,0,Article Number
+Exp_NumberSingular,1.725,0.555,0.002,Article Number
+Lang_GroupBilingual,-2.33,0.391,0,Article Number
+StatusDLD,-2.676,0.388,0,Article Number
+Exp_NumberSingular:Lang_GroupBilingual,-0.574,0.428,0.18,Article Number
+Exp_NumberSingular:StatusDLD,-0.116,0.411,0.778,Article Number

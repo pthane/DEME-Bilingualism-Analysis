@@ -1,0 +1,13 @@
+Variable,Estimate,SE,p,Model,Structure
+(Intercept),0.21265,0.40175,0.597,Language ability,Article omissions
+StatusDLD,0.64009,0.50577,0.206,Language ability,Article omissions
+(Intercept),-0.25692,0.46722,0.582,Bilingualism,Article omissions
+Lang_GroupBilingual,1.15017,0.54206,0.034,Bilingualism,Article omissions
+(Intercept),-2.24817,0.41754,0.000,Language ability,Clitic omissions
+StatusDLD,3.14609,0.5526,0.000,Language ability,Clitic omissions
+(Intercept),-0.86573,0.50659,0.087,Bilingualism,Clitic omissions
+Lang_GroupBilingual,0.43316,0.62092,0.485,Bilingualism,Clitic omissions
+(Intercept),0.91613,0.27199,0.001,Language ability,Non-finite verbs
+StatusDLD,0.69794,0.33947,0.040,Language ability,Non-finite verbs
+(Intercept),0.65487,0.26628,0.014,Bilingualism,Non-finite verbs
+Lang_GroupBilingual,1.00504,0.32974,0.002,Bilingualism,Non-finite verbs

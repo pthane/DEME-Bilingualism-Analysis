@@ -1,0 +1,95 @@
+library(here)
+library(tidyverse)
+library(patchwork)
+
+
+# Load data
+Data <- read_csv(here("CSV Files", "Aggregated Long Data.csv")) %>% 
+  drop_na(Structure)
+Data$Group <- factor(Data$Group, levels = c("ML-TD", "ML-DLD", "BL-TD", "BL-DLD"))
+Data$Structure <- factor(Data$Structure, levels = c("Articles", "Clitics", "Verbal Agreement", "Subjunctive"))
+
+
+
+# Prepare averages by structures
+Master_Bar <- Data %>% 
+  group_by(Group, Structure) %>%
+  summarize(Total_Accuracy = sum(Accuracy, na.rm = TRUE),
+            Total_Responses = sum(!is.na(Accuracy)),
+            Ratio = Total_Accuracy/Total_Responses) %>% 
+  mutate(Ratio = (Ratio*100))
+
+Master_Box <- Data %>% 
+  group_by(Code, Group, Structure) %>%
+  summarize(Total_Accuracy = sum(Accuracy, na.rm = TRUE),
+            Total_Responses = sum(!is.na(Accuracy)),
+            Ratio = Total_Accuracy/Total_Responses) %>% 
+  mutate(Ratio = (Ratio*100))
+
+
+# Summary of SDs for bar graph
+Master_Bar_Summary <- Master_Box %>%
+  group_by(Structure, Group) %>%
+  summarise(Average = mean(Ratio, na.rm = TRUE), 
+            SD = sd(Ratio, na.rm = TRUE), 
+            .groups = "drop")
+
+
+# Create bar graph
+Bar_Graph <- Master_Bar_Summary %>% 
+  ggplot(aes(x = Structure, y = Average, fill = Group)) + 
+  geom_bar(position = "dodge", color = "black", stat = "identity") +
+  scale_y_continuous(breaks = seq(0, 100, 20), limits = c(0, 102)) +
+  geom_text(aes(label = paste0(round(Average), "\n(", round(SD), ")")),
+            position = position_dodge(width = .9),
+            vjust = 0.5,
+            size = 2.5,
+            fontface = "bold") +
+  scale_x_discrete(labels = c("Artículos", "Clíticos", "Concordancia verbal", "Subjuntivo")) +
+  scale_fill_discrete(labels = c("ML-DT", "ML-TDL", "BL-DT", "BL-TDL")) +
+  labs(x = "Estructura",
+       y = "Porcentage de respuestas anticipadas",
+       fill = "Grupo",
+       title = "Promedio (DE) de producción por estructura y grupo") +
+  theme(axis.title = element_text(face = "bold"),
+        plot.title = element_text(hjust = 0.5, face = "bold"),
+        legend.title = element_text(face = "bold"),
+        strip.text = element_text(face = "bold"),
+        strip.text.x = element_text(face = "bold"))
+
+Bar_Graph
+
+ggsave(filename = here("Conferences", "SIUS", "Graphs", "Bar Graph.pdf"),
+       plot = Bar_Graph,
+       device = "pdf",
+       width = 8,
+       height = 3,
+       units = "in")
+
+
+# Generate boxplot
+Boxplot <- Master_Box %>% 
+  ggplot(aes(x = Structure, y = Ratio, fill = Group)) +
+  geom_boxplot() +
+  scale_y_continuous(breaks = seq (0, 100, 20),
+                     limits = c(0, 100)) +
+  scale_x_discrete(labels = c("Artículos", "Clíticos", "Concordancia verbal", "Subjuntivo")) +
+  scale_fill_discrete(labels = c("ML-DT", "ML-TDL", "BL-DT", "BL-TDL")) +
+  labs(x = "Estructura",
+       y = "Porcentage de respuestas anticipadas",
+       fill = "Grupo",
+       title = "Distribución de producción por estructura y grupo") +
+  theme(axis.title = element_text(face = "bold"),
+        plot.title = element_text(hjust = 0.5, face = "bold"),
+        legend.title = element_text(face = "bold"),
+        strip.text = element_text(face = "bold"),
+        strip.text.x = element_text(face = "bold"))
+
+Boxplot
+
+ggsave(filename = here("Conferences", "SIUS", "Graphs", "Boxplot.pdf"),
+       plot = Boxplot,
+       device = "pdf",
+       width = 8,
+       height = 3,
+       units = "in")

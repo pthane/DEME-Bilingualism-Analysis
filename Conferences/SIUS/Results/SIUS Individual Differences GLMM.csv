@@ -1,0 +1,5 @@
+Variable,Estimado,Error_est,p,group
+(Intercept),0.425,0.254,0.094,NA
+GroupBL-DLD,-2.527,0.282,0,NA
+Relative_Morphosyntax,0.008,0.008,0.339,NA
+GroupBL-DLD:Relative_Morphosyntax,0.019,0.017,0.265,NA

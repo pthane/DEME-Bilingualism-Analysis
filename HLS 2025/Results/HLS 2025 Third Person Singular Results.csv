@@ -1,5 +1,0 @@
-Effect,Estimate,SE,p,Contrast
-(Intercept),-0.99,0.15,0,Language ability
-StatusTD,-0.09,0.26,0.72575,Language ability
-(Intercept),-0.76,0.14,0,Bilingualism
-Lang_GroupMonolingual,-0.8,0.28,0.00434,Bilingualism
